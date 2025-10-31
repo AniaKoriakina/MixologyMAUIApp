@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mixology", "Mixology\Mixology.csproj", "{21701BA6-B0E7-4217-B068-0EE2D5EEFB02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mixology.Core", "Mixology.Core\Mixology.Core.csproj", "{03EAAE2C-774F-4756-A62C-EEA7E8674F81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mixology.Infrastructure", "Mixology.Infrastructure\Mixology.Infrastructure.csproj", "{CE844363-2AEC-49D9-AC08-95335366583B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mixology.Application", "Mixology.Application\Mixology.Application.csproj", "{CD1411F3-5372-41E0-B2DF-33BAD425289E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21701BA6-B0E7-4217-B068-0EE2D5EEFB02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21701BA6-B0E7-4217-B068-0EE2D5EEFB02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21701BA6-B0E7-4217-B068-0EE2D5EEFB02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21701BA6-B0E7-4217-B068-0EE2D5EEFB02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03EAAE2C-774F-4756-A62C-EEA7E8674F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03EAAE2C-774F-4756-A62C-EEA7E8674F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03EAAE2C-774F-4756-A62C-EEA7E8674F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03EAAE2C-774F-4756-A62C-EEA7E8674F81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE844363-2AEC-49D9-AC08-95335366583B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE844363-2AEC-49D9-AC08-95335366583B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE844363-2AEC-49D9-AC08-95335366583B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE844363-2AEC-49D9-AC08-95335366583B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1411F3-5372-41E0-B2DF-33BAD425289E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1411F3-5372-41E0-B2DF-33BAD425289E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1411F3-5372-41E0-B2DF-33BAD425289E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1411F3-5372-41E0-B2DF-33BAD425289E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
