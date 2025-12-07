@@ -1,6 +1,7 @@
 namespace Mixology.Core.Shared.Result;
 
-public class IResult
+public interface IResult
 {
-    
+    bool IsSuccess { get; }
+    IReadOnlyList<IError> GetErrors();
 }
