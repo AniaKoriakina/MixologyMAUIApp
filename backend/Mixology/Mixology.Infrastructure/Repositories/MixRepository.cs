@@ -11,13 +11,19 @@ public class MixRepository : Repository<Mix>, IMixRepository
     {
     }
 
-    public Task<IEnumerable<Mix>> GetByUserIdAsync(long userId)
+    public async Task<IEnumerable<Mix>> GetByUserIdAsync(long userId)
     {
-        throw new NotImplementedException();
+        return await _dbSet
+            .Where(m => m.UserId == userId)
+            .OrderByDescending(m => m.CreatedAt)
+            .ToListAsync();
     }
 
-    public Task<IEnumerable<Mix>> GetTopRatedAsync(int count)
+    public async Task<IEnumerable<Mix>> GetTopRatedAsync(int count)
     {
-        throw new NotImplementedException();
+        return await _dbSet
+            .OrderByDescending(m => m.RatingAverage)
+            .Take(count)
+            .ToListAsync();
     }
 }

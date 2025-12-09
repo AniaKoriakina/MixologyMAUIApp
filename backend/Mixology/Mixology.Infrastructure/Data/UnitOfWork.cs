@@ -8,7 +8,12 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext _context;
     public IMixRepository Mixes { get; }
-    public IRepository<User> Users { get; }
+    public IUserRepository Users { get; }
+    public IBrandRepository Brands { get; }
+    public IRawMaterialRepository RawMaterials { get; }
+    public ICollectionRepository Collections { get; }
+    public IFavoriteMixRepository FavoriteMixes { get; }
+    public IRatingRepository Ratings { get; }
     
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
@@ -18,8 +23,13 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(AppDbContext context)
     {
         _context = context;
-        Users = new Repository<User>(_context);
+        Users = new UserRepository(_context);
         Mixes = new MixRepository(context);
+        Brands = new BrandRepository(context);
+        RawMaterials = new RawMaterialRepository(context);
+        Collections = new CollectionRepository(context);
+        FavoriteMixes = new FavoriteMixRepository(context);
+        Ratings = new RatingRepository(context);
     }
 
     #region IDisposable Implementation

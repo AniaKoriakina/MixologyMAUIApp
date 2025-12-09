@@ -9,6 +9,4 @@ public class RawMaterial : BaseEntity
     public FlavorProfile Flavor { get; set; }
     public int Strength { get; set; } // 1-3
     public long BrandId { get; set; }
-    
-    public List<MixComposition> Mixes { get; set; }
 }
