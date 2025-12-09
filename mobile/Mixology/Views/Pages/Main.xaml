@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<rxui:ReactiveContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:rxui="clr-namespace:ReactiveUI.Maui;assembly=ReactiveUI.Maui"
+                          xmlns:vm="clr-namespace:Mixology.ViewModels"
+                          xmlns:components="clr-namespace:Mixology.Views.Components"
+                          x:Class="Mixology.Views.Pages.Main"
+                          x:TypeArguments="vm:MainVM"
+                          BackgroundColor="{StaticResource BackgroundColor}">
+    
+    <rxui:ReactiveContentPage.Content>
+        <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+            
+        <Border Grid.Row="0" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+            
+            <Grid BackgroundColor="{StaticResource CardColor}" ColumnDefinitions="Auto,*,Auto" Padding="15,10" ColumnSpacing="8" HeightRequest="50">
+                <Image Grid.Column="0"
+                       Source="loupe.svg" 
+                       WidthRequest="17" 
+                       HeightRequest="17"
+                       VerticalOptions="Center"/>
+                <Entry Grid.Column="1"
+                       Text="{Binding SearchText}"
+                       Placeholder="Поиск..."
+                       VerticalOptions="CenterAndExpand"
+                       TextColor="{StaticResource PrimaryTextColor}"
+                       PlaceholderColor="{StaticResource PrimaryTextColor}"
+                       FontFamily="OpenSansRegular"
+                       FontSize="14"
+                       HeightRequest="10"/> 
+                
+                <HorizontalStackLayout Grid.Column="2" Spacing="5">
+                    <Button Text="✕"
+                            Command="{Binding ClearSearchCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="Gray"
+                            FontSize="18"
+                            Padding="8,0"
+                            IsVisible="{Binding SearchText, Converter={StaticResource IsNotEmptyConverter}}"/>
+                    
+                    <ImageButton Source="filters.svg"
+                            Command="{Binding ToggleFilterCommand}"
+                            WidthRequest="19"
+                            HeightRequest="16"
+                            Padding="12"
+                            CornerRadius="0"
+                            BackgroundColor="Transparent"
+                            VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Grid>
+        </Border>
+            
+        <Frame Grid.Row="1" 
+               IsVisible="{Binding IsFilterVisible}"
+               Margin="15,5,15,5"
+               Padding="15"
+               BorderColor="LightGray"
+               BackgroundColor="#F5F5F5">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Фильтры" FontAttributes="Bold" FontSize="16"/>
+                
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="5">
+                    <Button Grid.Column="0" 
+                            Text="По рейтингу ↓" 
+                            Command="{Binding SetSortCommand}"
+                            CommandParameter="rating_desc"
+                            BackgroundColor="#512BD4"
+                            TextColor="White"
+                            FontSize="12"
+                            Padding="5"/>
+                    <Button Grid.Column="1" 
+                            Text="По рейтингу ↑" 
+                            Command="{Binding SetSortCommand}"
+                            CommandParameter="rating_asc"
+                            BackgroundColor="#512BD4"
+                            TextColor="White"
+                            FontSize="12"
+                            Padding="5"/>
+                    <Button Grid.Column="2" 
+                            Text="Новые" 
+                            Command="{Binding SetSortCommand}"
+                            CommandParameter="newest"
+                            BackgroundColor="#512BD4"
+                            TextColor="White"
+                            FontSize="12"
+                            Padding="5"/>
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
+        
+        <Label Grid.Row="2" 
+               Text="Выбор пользователей" 
+               TextColor="{StaticResource PrimaryTextColor}" 
+               FontFamily="OpenSansExtraBold" 
+               FontSize="24"/>
+
+        <ActivityIndicator Grid.Row="2" 
+                          IsRunning="{Binding IsLoading}" 
+                          IsVisible="{Binding IsLoading}"
+                          Margin="10"/>
+
+        <!--TODO:Настроить вывод для ошибок сервера -->
+        <Label Grid.Row="3"
+               Text="{Binding ErrorMessage}"
+               IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}"
+               TextColor="Red"
+               Margin="10"
+               HorizontalOptions="Center"/>
+        
+        <CollectionView Grid.Row="4" ItemsSource="{Binding Mixes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <components:MixCard Mix="{Binding .}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+    </rxui:ReactiveContentPage.Content>
+    
+</rxui:ReactiveContentPage>

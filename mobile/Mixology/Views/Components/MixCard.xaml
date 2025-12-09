@@ -1,0 +1,119 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dto="clr-namespace:Mixology.Services.DTOs"
+             x:Class="Mixology.Views.Components.MixCard"
+             x:DataType="dto:MixDto">
+
+    <Frame 
+        Padding="15"
+        Margin="5"
+        CornerRadius="10"
+        HasShadow="True"
+        BackgroundColor="{StaticResource CardColor}">
+        
+        <Grid RowDefinitions="Auto,Auto">
+            <VerticalStackLayout Grid.Row="0" Spacing="8">
+                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                    <Label Grid.Column="0"
+                           Text="{Binding Name}" 
+                           FontSize="20"
+                           TextColor="{StaticResource SecondaryTextColor}"
+                           FontFamily="OpenSansSemibold" />
+
+                    <Label Grid.Column="1"
+                           Text="{Binding AuthorName, StringFormat='by {0}'}"
+                           FontSize="15"
+                           TextColor="{StaticResource TertiaryTextColor}"
+                           VerticalOptions="Center"
+                           FontFamily="OpenSansSemibold" />
+
+                    <Image Grid.Column="2"
+                           Source="loupe.svg"
+                           WidthRequest="15"
+                           HeightRequest="15"
+                           VerticalOptions="Center" />
+                </Grid>
+                
+                <Label Text="{Binding Description}"
+                       FontSize="14"
+                       TextColor="#666"
+                       LineBreakMode="WordWrap" />
+                
+                <FlexLayout Direction="Row"
+                            Wrap="Wrap"
+                            AlignItems="Start"
+                            BindableLayout.ItemsSource="{Binding Compositions}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="dto:CompositionDto">
+                            <Frame BackgroundColor="#F5F5F5"
+                                   Padding="6,3"
+                                   Margin="2"
+                                   CornerRadius="8"
+                                   HasShadow="False"
+                                   BorderColor="Transparent">
+                                <Label FontSize="11" 
+                                       FontFamily="OpenSansSemibold" 
+                                       TextColor="{StaticResource SecondaryTextColor}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding MaterialName}" />
+                                            <Span Text=" " />
+                                            <Span Text="{Binding Percentage, StringFormat='{0}%'}" 
+                                                  TextColor="{StaticResource TertiaryTextColor}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+
+                <Grid RowDefinitions="Auto" Margin="0" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <FlexLayout Grid.Column="0"
+                                Direction="Row"
+                                Wrap="Wrap"
+                                AlignItems="Start"
+                                BindableLayout.ItemsSource="{Binding Flavor.Tags}">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="{x:Type x:String}">
+                                <Frame BackgroundColor="#E8E8E8"
+                                       Padding="8,4"
+                                       CornerRadius="12"
+                                       HasShadow="False"
+                                       BorderColor="Transparent">
+                                    <Label Text="{Binding}" FontSize="10" FontFamily="OpenSansSemibold" TextColor="{StaticResource SecondaryTextColor}"/>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </FlexLayout>
+                    
+                    <HorizontalStackLayout Grid.Column="1"
+                                           Spacing="6"
+                                           VerticalOptions="End"
+                                           HorizontalOptions="End">
+
+                        <Label Text="⭐" FontSize="16"/>
+                        <Label Text="{Binding RatingAverage, StringFormat='{0:F1}'}"
+                               FontSize="16"
+                               VerticalOptions="Center"
+                               FontFamily="OpenSansSemibold"
+                               TextColor="{StaticResource SecondaryTextColor}"/>
+                        <Label Text="{Binding RatingCount, StringFormat='({0})'}"
+                               FontSize="12"
+                               TextColor="#999"
+                               VerticalOptions="Center"
+                               FontFamily="OpenSansSemibold"/>
+                    </HorizontalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+    </Frame>
+
+</ContentView>

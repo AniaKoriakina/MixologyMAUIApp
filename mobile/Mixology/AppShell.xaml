@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Mixology.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Mixology.Views.Pages"
+    Title="Mixology"
+    BackgroundColor="{StaticResource BackgroundColor}">
+
+    <TabBar>
+        <ShellContent
+            Title="Миксы"
+            Icon="dotnet_bot.png"
+            ContentTemplate="{DataTemplate pages:Main}"
+            Route="MainPage" />
+        
+        <ShellContent
+            Title="ReactiveUI"
+            Icon="dotnet_bot.png"
+            ContentTemplate="{DataTemplate pages:Register}"
+            Route="RegisterPage" />
+    </TabBar>
+
+</Shell>
