@@ -11,6 +11,7 @@
 - PostgreSQL
 - MediatR (CQS-паттерн)
 - Swagger
+
 И часть мобильного приложения:
 - MAUI
 - ReactiveUI
