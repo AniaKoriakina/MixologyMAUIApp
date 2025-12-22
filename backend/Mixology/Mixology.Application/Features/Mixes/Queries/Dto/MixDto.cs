@@ -13,6 +13,6 @@ public class MixDto
     public double RatingAverage { get; set; }
     public int RatingCount { get; set; }
     public FlavorProfile Flavor { get; set; }
-    public List<MixComposition> Compositions { get; set; }
+    public List<MixCompositionDto> Compositions { get; set; }
     public string? CollectionName { get; set; }
 }

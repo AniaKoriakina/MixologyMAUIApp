@@ -25,4 +25,11 @@ public class RawMaterialRepository : Repository<RawMaterial>, IRawMaterialReposi
                         rm.Flavor.Tags.Any(t => t.Contains(searchTerm)))
             .ToListAsync();
     }
+
+    public async Task<IEnumerable<RawMaterial>> GetByIdsAsync(IEnumerable<long> ids)
+    {
+        return await _dbSet
+            .Where(rm => ids.Contains(rm.Id))
+            .ToListAsync();
+    }
 }

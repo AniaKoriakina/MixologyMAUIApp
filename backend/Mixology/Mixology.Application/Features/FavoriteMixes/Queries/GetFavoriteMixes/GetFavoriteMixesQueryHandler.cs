@@ -1,5 +1,6 @@
 using Mixology.Application.Cqs;
 using Mixology.Application.Features.Mixes.Queries.Dto;
+using Mixology.Application.Features.Mixes.Queries.Helpers;
 using Mixology.Core.Base.Infrastructure;
 using Mixology.Core.Shared.Result;
 
@@ -18,6 +19,14 @@ public class GetFavoriteMixesQueryHandler : QueryHandler<GetFavoriteMixesQuery, 
     {
         var favoriteMixes = await _unitOfWork.FavoriteMixes.GetFavoriteMixesByUserIdAsync(request.UserId);
         
+        var allTobaccoIds = favoriteMixes
+            .SelectMany(m => m.Compositions.Select(c => c.TobaccoId))
+            .Distinct()
+            .ToList();
+        
+        var tobaccos = await _unitOfWork.RawMaterials.GetByIdsAsync(allTobaccoIds);
+        var tobaccoDict = tobaccos.ToDictionary(t => t.Id, t => t.Name);
+        
         var result = new List<MixDto>();
         
         foreach (var mix in favoriteMixes)
@@ -25,6 +34,13 @@ public class GetFavoriteMixesQueryHandler : QueryHandler<GetFavoriteMixesQuery, 
             var user = await _unitOfWork.Users.GetByIdAsync(mix.UserId);
             var authorName = user?.IsActive == true ? user.Username : "Удалённый пользователь";
             var ratingCount = await _unitOfWork.Ratings.GetRatingCountForMixAsync(mix.Id);
+            
+            var compositionDtos = mix.Compositions.Select(composition => new MixCompositionDto
+            {
+                TobaccoId = composition.TobaccoId,
+                TobaccoName = tobaccoDict.GetValueOrDefault(composition.TobaccoId, "Неизвестно"),
+                Percentage = composition.Percentage
+            }).ToList();
 
             result.Add(new MixDto
             {
@@ -37,7 +53,7 @@ public class GetFavoriteMixesQueryHandler : QueryHandler<GetFavoriteMixesQuery, 
                 RatingAverage = mix.RatingAverage,
                 RatingCount = ratingCount,
                 Flavor = mix.Flavor,
-                Compositions = mix.Compositions
+                Compositions = compositionDtos
             });
         }
 

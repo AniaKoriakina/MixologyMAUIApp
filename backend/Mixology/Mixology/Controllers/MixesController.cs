@@ -34,23 +34,35 @@ public class MixesController : ControllerBase
     }
     
     [HttpGet("search")]
-    public async Task<IActionResult> SearchMixes([FromQuery] string? searchTerm, [FromQuery] string? sortBy)
+    public async Task<IActionResult> SearchMixes(
+        [FromQuery] string? searchTerm, 
+        [FromQuery] string? sortBy,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20)
     {
         var result = await _mediator.Send(new SearchMixesQuery 
         { 
             SearchTerm = searchTerm, 
-            SortBy = sortBy 
+            SortBy = sortBy,
+            Page = page,
+            PageSize = pageSize
         });
         return result.IsSuccess ? Ok(result) : BadRequest(result);
     }
     
     [HttpGet("user/{userId}")]
-    public async Task<IActionResult> GetUserMixes(long userId, [FromQuery] string? searchTerm)
+    public async Task<IActionResult> GetUserMixes(
+        long userId, 
+        [FromQuery] string? searchTerm,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20)
     {
         var result = await _mediator.Send(new GetUserMixesQuery 
         { 
             UserId = userId, 
-            SearchTerm = searchTerm 
+            SearchTerm = searchTerm,
+            Page = page,
+            PageSize = pageSize
         });
         return result.IsSuccess ? Ok(result) : BadRequest(result);
     }

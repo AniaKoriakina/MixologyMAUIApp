@@ -1,5 +1,6 @@
 using Mixology.Application.Cqs;
 using Mixology.Application.Features.Mixes.Queries.Dto;
+using Mixology.Application.Features.Mixes.Queries.Helpers;
 using Mixology.Core.Base.Infrastructure;
 using Mixology.Core.Shared.Result;
 
@@ -36,6 +37,8 @@ public class GetMixByIdQueryHandler : QueryHandler<GetMixByIdQuery, MixDto>
                 collectionName = collection.Name;
             }
         }
+        
+        var compositionDtos = await MixMappingHelper.MapCompositionsAsync(mix.Compositions, _unitOfWork);
 
         var dto = new MixDto
         {
@@ -48,7 +51,7 @@ public class GetMixByIdQueryHandler : QueryHandler<GetMixByIdQuery, MixDto>
             RatingAverage = mix.RatingAverage,
             RatingCount = ratingCount,
             Flavor = mix.Flavor,
-            Compositions = mix.Compositions,
+            Compositions = compositionDtos,
             CollectionName = collectionName
         };
 

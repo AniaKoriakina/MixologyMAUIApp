@@ -1,6 +1,7 @@
 using Mixology.Application.Cqs;
 using Mixology.Application.Features.Collections.Queries.Dto;
 using Mixology.Application.Features.Mixes.Queries.Dto;
+using Mixology.Application.Features.Mixes.Queries.Helpers;
 using Mixology.Core.Base.Infrastructure;
 using Mixology.Core.Shared.Result;
 
@@ -19,6 +20,14 @@ public class GetUserCollectionsQueryHandler : QueryHandler<GetUserCollectionsQue
     {
         var collections = await _unitOfWork.Collections.GetCollectionsWithMixesAsync(request.UserId);
         
+        var allTobaccoIds = collections
+            .SelectMany(c => c.Mixes.SelectMany(m => m.Compositions.Select(comp => comp.TobaccoId)))
+            .Distinct()
+            .ToList();
+        
+        var tobaccos = await _unitOfWork.RawMaterials.GetByIdsAsync(allTobaccoIds);
+        var tobaccoDict = tobaccos.ToDictionary(t => t.Id, t => t.Name);
+        
         var result = new List<CollectionDto>();
         
         foreach (var collection in collections)
@@ -35,7 +44,12 @@ public class GetUserCollectionsQueryHandler : QueryHandler<GetUserCollectionsQue
                     HasImage = m.ImageData != null,
                     RatingAverage = m.RatingAverage,
                     Flavor = m.Flavor,
-                    Compositions = m.Compositions
+                    Compositions = m.Compositions.Select(composition => new MixCompositionDto
+                    {
+                        TobaccoId = composition.TobaccoId,
+                        TobaccoName = tobaccoDict.GetValueOrDefault(composition.TobaccoId, "Неизвестно"),
+                        Percentage = composition.Percentage
+                    }).ToList()
                 })
                 .ToList();
 
