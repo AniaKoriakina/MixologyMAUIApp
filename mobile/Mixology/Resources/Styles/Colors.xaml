@@ -38,6 +38,7 @@
     <Color x:Key="PrimaryTextColor">#4C2713</Color>
     <Color x:Key="SecondaryTextColor">#211D16</Color>
     <Color x:Key="TertiaryTextColor">#B49277</Color>
+    <Color x:Key="EntryColor">#D3CDB3</Color>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>

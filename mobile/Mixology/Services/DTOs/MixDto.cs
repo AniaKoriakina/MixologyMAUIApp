@@ -13,7 +13,7 @@ public class MixDto
     public float RatingAverage { get; set; }
     public int RatingCount { get; set; }
     public DateTime CreatedAt { get; set; }
-    public FlavorDto? Flavor { get; set; }
+    public FlavorProfile? Flavor { get; set; }
     
     [JsonIgnore]
     public List<string> FlavorTags => Flavor?.Tags ?? new List<string>();

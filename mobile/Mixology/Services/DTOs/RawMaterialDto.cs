@@ -4,7 +4,7 @@ public class RawMaterialDto
 {
     public long Id { get; set; }
     public string Name { get; set; }
-    public List<FlavorDto> Flavors { get; set; } = new List<FlavorDto>();
+    public FlavorProfile Flavor { get; set; } 
     public int Strength {get; set;}
     public long BrandId {get; set;}
 }
