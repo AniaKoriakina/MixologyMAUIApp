@@ -19,8 +19,8 @@ public class MixesController : ControllerBase
     }
     
     [HttpPost]
-    [Consumes("multipart/form-data")]
-    public async Task<IActionResult> CreateMix([FromForm] CreateMixCommand command)
+    [Consumes("application/json")]
+    public async Task<IActionResult> CreateMix([FromBody] CreateMixCommand command)
     {
         var result = await _mediator.Send(command);
         return result.IsSuccess ? Ok(result) : BadRequest(result);

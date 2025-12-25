@@ -20,12 +20,14 @@ public class RawMaterialRepository : Repository<RawMaterial>, IRawMaterialReposi
 
     public async Task<IEnumerable<RawMaterial>> SearchByNameOrFlavorAsync(string searchTerm)
     {
-        return await _dbSet
-            .Where(rm => rm.Name.Contains(searchTerm) || 
-                        rm.Flavor.Tags.Any(t => t.Contains(searchTerm)))
-            .ToListAsync();
+        var materials = await _dbSet.ToListAsync();
+        
+        return materials.Where(rm =>
+            rm.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+            rm.Flavor.Tags.Any(t => t.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+        );
     }
-
+    
     public async Task<IEnumerable<RawMaterial>> GetByIdsAsync(IEnumerable<long> ids)
     {
         return await _dbSet

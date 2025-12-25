@@ -3,7 +3,7 @@ using Mixology.Application.Features.RawMaterials.Queries.Dto;
 using Mixology.Core.Base.Infrastructure;
 using Mixology.Core.Shared.Result;
 
-namespace Mixology.Application.Features.RawMaterials.Queries;
+namespace Mixology.Application.Features.RawMaterials.Queries.GetMaterialById;
 
 public class GetRawMaterialByIdQueryHandler : QueryHandler<GetRawMaterialByIdQuery, RawMaterialDto>
 {

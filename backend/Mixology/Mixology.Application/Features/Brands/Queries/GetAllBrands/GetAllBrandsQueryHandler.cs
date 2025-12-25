@@ -1,6 +1,7 @@
 using Mixology.Application.Cqs;
 using Mixology.Application.Features.Brands.Queries.Dto;
 using Mixology.Core.Base.Infrastructure;
+using Mixology.Core.Entities;
 using Mixology.Core.Shared.Result;
 
 namespace Mixology.Application.Features.Brands.Queries.GetAllBrands;
@@ -16,7 +17,7 @@ public class GetAllBrandsQueryHandler : QueryHandler<GetAllBrandsQuery, List<Bra
 
     public override async Task<Result<List<BrandDto>>> Handle(GetAllBrandsQuery request, CancellationToken cancellationToken)
     {
-        IEnumerable<Core.Entities.Brand> brands;
+        IEnumerable<Brand> brands;
 
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
