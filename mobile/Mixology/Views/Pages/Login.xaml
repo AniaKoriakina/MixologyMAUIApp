@@ -9,27 +9,27 @@
     x:Class="Mixology.Views.Pages.Login"
     BackgroundColor="{StaticResource BackgroundColor}"
     Shell.NavBarIsVisible="False">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:BoolToColorConverter x:Key="BoolToColor"
                                              TrueColor="{StaticResource ActiveButton}"
-                                             FalseColor="{StaticResource InactiveButton}"/>
-            <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
+                                             FalseColor="{StaticResource InactiveButton}" />
+            <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <rxui:ReactiveContentPage.Content>
         <Grid Margin="30" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*"
               VerticalOptions="Center">
-            
-            <Label Grid.Row="0" Grid.Column="0" Text="Вход" 
+
+            <Label Grid.Row="0" Grid.Column="0" Text="Вход"
                    HorizontalTextAlignment="Center"
                    FontFamily="OpenSansExtraBold"
                    FontSize="25"
-                   TextColor="{StaticResource SecondaryTextColor}"/>
-            
-            <Border 
+                   TextColor="{StaticResource SecondaryTextColor}" />
+
+            <Border
                 Grid.Row="2" Grid.Column="0"
                 StrokeShape="RoundRectangle 15"
                 BackgroundColor="{StaticResource CardColor}"
@@ -38,31 +38,31 @@
                 Margin="0,20,0,0"
                 HorizontalOptions="FillAndExpand"
                 HeightRequest="60">
-                
+
                 <Border.Shadow>
-                    <Shadow 
-                        Brush="Black" 
-                        Opacity="0.25" 
+                    <Shadow
+                        Brush="Black"
+                        Opacity="0.25"
                         Radius="10">
                         <Shadow.Offset>
-                            <Point X="0" Y="5"/>
+                            <Point X="0" Y="5" />
                         </Shadow.Offset>
                     </Shadow>
                 </Border.Shadow>
 
                 <Entry x:Name="EmailEntry"
-                    Text="{Binding Email}"
-                    Placeholder="Email"
-                    FontFamily="OpenSansRegular"
-                    TextColor="{StaticResource PrimaryTextColor}"
-                    PlaceholderColor="{StaticResource TertiaryTextColor}"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Fill"
-                    HeightRequest="60"/>
+                       Text="{Binding Email}"
+                       Placeholder="Email"
+                       FontFamily="OpenSansRegular"
+                       TextColor="{StaticResource PrimaryTextColor}"
+                       PlaceholderColor="{StaticResource TertiaryTextColor}"
+                       BackgroundColor="Transparent"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Fill"
+                       HeightRequest="60" />
             </Border>
-            
-            <Border 
+
+            <Border
                 Grid.Row="3" Grid.Column="0"
                 StrokeShape="RoundRectangle 15"
                 BackgroundColor="{StaticResource CardColor}"
@@ -71,31 +71,31 @@
                 Margin="0,20,0,0"
                 HorizontalOptions="FillAndExpand"
                 HeightRequest="60">
-                
+
                 <Border.Shadow>
-                    <Shadow 
-                        Brush="Black" 
-                        Opacity="0.25" 
+                    <Shadow
+                        Brush="Black"
+                        Opacity="0.25"
                         Radius="10">
                         <Shadow.Offset>
-                            <Point X="0" Y="5"/>
+                            <Point X="0" Y="5" />
                         </Shadow.Offset>
                     </Shadow>
                 </Border.Shadow>
 
                 <Entry x:Name="PasswordEntry"
-                    Text="{Binding Password}"
-                    Placeholder="Пароль"
-                    FontFamily="OpenSansRegular"
-                    TextColor="{StaticResource PrimaryTextColor}"
-                    PlaceholderColor="{StaticResource TertiaryTextColor}"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Fill"
-                    HeightRequest="60"
-                    IsPassword="True"/>
+                       Text="{Binding Password}"
+                       Placeholder="Пароль"
+                       FontFamily="OpenSansRegular"
+                       TextColor="{StaticResource PrimaryTextColor}"
+                       PlaceholderColor="{StaticResource TertiaryTextColor}"
+                       BackgroundColor="Transparent"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Fill"
+                       HeightRequest="60"
+                       IsPassword="True" />
             </Border>
-            
+
             <Border Grid.Row="5" Grid.Column="0"
                     StrokeShape="RoundRectangle 15"
                     BackgroundColor="{StaticResource CardColor}"
@@ -104,41 +104,41 @@
                     HorizontalOptions="FillAndExpand">
 
                 <Border.Shadow>
-                    <Shadow 
-                        Brush="Black" 
-                        Opacity="0.25" 
+                    <Shadow
+                        Brush="Black"
+                        Opacity="0.25"
                         Radius="10">
                         <Shadow.Offset>
-                            <Point X="0" Y="5"/>
+                            <Point X="0" Y="5" />
                         </Shadow.Offset>
                     </Shadow>
                 </Border.Shadow>
 
                 <Button x:Name="LoginButton"
-                    Text="Войти"
-                    Command="{Binding LoginCommand}"
-                    IsEnabled="{Binding CanLogin}"
-                    BackgroundColor="{Binding CanLogin, Converter={StaticResource BoolToColor}}"
-                    TextColor="{StaticResource PrimaryTextColor}"
-                    FontFamily="OpenSansExtraBold"
-                    FontSize="22"
-                    HeightRequest="60"
-                    HorizontalOptions="FillAndExpand"/>
+                        Text="Войти"
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding CanLogin}"
+                        BackgroundColor="{Binding CanLogin, Converter={StaticResource BoolToColor}}"
+                        TextColor="{StaticResource PrimaryTextColor}"
+                        FontFamily="OpenSansExtraBold"
+                        FontSize="22"
+                        HeightRequest="60"
+                        HorizontalOptions="FillAndExpand" />
             </Border>
-            
+
             <Grid Grid.Row="6" Margin="0,20,0,0" HorizontalOptions="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Label Grid.Column="0"
                        Text="Нет аккаунт?"
                        VerticalOptions="Center"
                        TextColor="{StaticResource SecondaryTextColor}"
                        FontFamily="OpenSansRegular"
-                       FontSize="14"/>
-                
+                       FontSize="14" />
+
                 <Button Grid.Column="1"
                         Text="Зарегистрироваться"
                         Command="{Binding NavigateToRegisterCommand}"
@@ -149,7 +149,7 @@
                         Padding="0"
                         Margin="5,0,0,0"
                         HorizontalOptions="Start"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center" />
             </Grid>
         </Grid>
     </rxui:ReactiveContentPage.Content>

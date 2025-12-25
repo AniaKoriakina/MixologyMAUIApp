@@ -13,12 +13,13 @@ public class RegisterVM : ReactiveObject, IActivatableViewModel
     private readonly UserService _userService;
     private readonly NotificationService _notificationService;
     private readonly IFirebaseService _firebaseService;
-    
+
     private readonly ObservableAsPropertyHelper<bool> _canRegister;
     public ViewModelActivator Activator { get; } = new();
     public bool CanRegister => _canRegister.Value;
-    
+
     private string _username = string.Empty;
+
     public string Username
     {
         get => _username;
@@ -26,6 +27,7 @@ public class RegisterVM : ReactiveObject, IActivatableViewModel
     }
 
     private string _email = string.Empty;
+
     public string Email
     {
         get => _email;
@@ -33,13 +35,15 @@ public class RegisterVM : ReactiveObject, IActivatableViewModel
     }
 
     private string _password = string.Empty;
+
     public string Password
     {
         get => _password;
         set => this.RaiseAndSetIfChanged(ref _password, value);
     }
-    
+
     private bool _isBusy;
+
     public bool IsBusy
     {
         get => _isBusy;
@@ -47,13 +51,15 @@ public class RegisterVM : ReactiveObject, IActivatableViewModel
     }
 
     private string _errorMessage = string.Empty;
+
     public string ErrorMessage
     {
         get => _errorMessage;
         set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
     }
-    
+
     private string? _firebaseToken;
+
     public string? FirebaseToken
     {
         get => _firebaseToken;
@@ -64,7 +70,8 @@ public class RegisterVM : ReactiveObject, IActivatableViewModel
     public ReactiveCommand<Unit, Unit> NavigateToLoginCommand { get; }
     public ReactiveCommand<Unit, Unit> GetFirebaseTokenCommand { get; }
 
-    public RegisterVM(UserService userService, NotificationService notificationService, IFirebaseService firebaseService)
+    public RegisterVM(UserService userService, NotificationService notificationService,
+        IFirebaseService firebaseService)
     {
         _userService = userService;
         _notificationService = notificationService;
@@ -80,18 +87,18 @@ public class RegisterVM : ReactiveObject, IActivatableViewModel
                     !string.IsNullOrWhiteSpace(e) &&
                     !string.IsNullOrWhiteSpace(p)
             );
-        
+
         NavigateToLoginCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             await Shell.Current.GoToAsync("//login");
         });
 
         RegisterCommand = ReactiveCommand.CreateFromTask(RegisterAsync, canRegister);
-        
+
         GetFirebaseTokenCommand = ReactiveCommand.CreateFromTask(GetFirebaseTokenAsync);
-        
+
         canRegister.ToProperty(this, x => x.CanRegister, out _canRegister);
-        
+
         this.WhenActivated((CompositeDisposable disposables) =>
         {
             Observable.FromAsync(InitializeFirebaseAsync).Subscribe().DisposeWith(disposables);
@@ -119,7 +126,7 @@ public class RegisterVM : ReactiveObject, IActivatableViewModel
                 ErrorMessage = "Ошибка регистрации";
                 return false;
             }
-            
+
             var loginRequest = new LoginRequest
             {
                 Email = Email,
@@ -177,7 +184,7 @@ public class RegisterVM : ReactiveObject, IActivatableViewModel
             };
 
             var success = await _notificationService.SendDeviceTokenAsync(request);
-            
+
             if (success)
             {
                 System.Diagnostics.Debug.WriteLine($"Токен устройства успешно отправлен для: {Username}");
@@ -195,7 +202,7 @@ public class RegisterVM : ReactiveObject, IActivatableViewModel
             return false;
         }
     }
-    
+
     private async Task InitializeFirebaseAsync()
     {
         try

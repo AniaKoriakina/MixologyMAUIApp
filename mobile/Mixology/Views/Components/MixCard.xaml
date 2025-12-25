@@ -4,18 +4,18 @@
              x:Class="Mixology.Views.Components.MixCard"
              x:DataType="dto:MixDto">
 
-    <Frame 
+    <Frame
         Padding="15"
         Margin="5"
         CornerRadius="10"
         HasShadow="True"
         BackgroundColor="{StaticResource CardColor}">
-        
+
         <Grid RowDefinitions="Auto,Auto">
             <VerticalStackLayout Grid.Row="0" Spacing="8">
                 <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
                     <Label Grid.Column="0"
-                           Text="{Binding Name}" 
+                           Text="{Binding Name}"
                            FontSize="20"
                            TextColor="{StaticResource SecondaryTextColor}"
                            FontFamily="OpenSansSemibold" />
@@ -33,12 +33,12 @@
                            HeightRequest="15"
                            VerticalOptions="Center" />
                 </Grid>
-                
+
                 <Label Text="{Binding Description}"
                        FontSize="14"
                        TextColor="#666"
                        LineBreakMode="WordWrap" />
-                
+
                 <FlexLayout Direction="Row"
                             Wrap="Wrap"
                             AlignItems="Start"
@@ -51,14 +51,14 @@
                                    CornerRadius="8"
                                    HasShadow="False"
                                    BorderColor="Transparent">
-                                <Label FontSize="11" 
-                                       FontFamily="OpenSansSemibold" 
+                                <Label FontSize="11"
+                                       FontFamily="OpenSansSemibold"
                                        TextColor="{StaticResource SecondaryTextColor}">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="{Binding MaterialName}" />
+                                            <Span Text="{Binding TobaccoName}" />
                                             <Span Text=" " />
-                                            <Span Text="{Binding Percentage, StringFormat='{0}%'}" 
+                                            <Span Text="{Binding Percentage, StringFormat='{0}%'}"
                                                   TextColor="{StaticResource TertiaryTextColor}" />
                                         </FormattedString>
                                     </Label.FormattedText>
@@ -73,7 +73,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <FlexLayout Grid.Column="0"
                                 Direction="Row"
                                 Wrap="Wrap"
@@ -87,29 +87,30 @@
                                        CornerRadius="12"
                                        HasShadow="False"
                                        BorderColor="Transparent">
-                                    <Label Text="{Binding}" FontSize="10" FontFamily="OpenSansSemibold" TextColor="{StaticResource SecondaryTextColor}"/>
+                                    <Label Text="{Binding}" FontSize="10" FontFamily="OpenSansSemibold"
+                                           TextColor="{StaticResource SecondaryTextColor}" />
                                 </Frame>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
 
                     </FlexLayout>
-                    
+
                     <HorizontalStackLayout Grid.Column="1"
                                            Spacing="6"
                                            VerticalOptions="End"
                                            HorizontalOptions="End">
 
-                        <Label Text="⭐" FontSize="16"/>
+                        <Label Text="⭐" FontSize="16" />
                         <Label Text="{Binding RatingAverage, StringFormat='{0:F1}'}"
                                FontSize="16"
                                VerticalOptions="Center"
                                FontFamily="OpenSansSemibold"
-                               TextColor="{StaticResource SecondaryTextColor}"/>
+                               TextColor="{StaticResource SecondaryTextColor}" />
                         <Label Text="{Binding RatingCount, StringFormat='({0})'}"
                                FontSize="12"
                                TextColor="#999"
                                VerticalOptions="Center"
-                               FontFamily="OpenSansSemibold"/>
+                               FontFamily="OpenSansSemibold" />
                     </HorizontalStackLayout>
                 </Grid>
             </VerticalStackLayout>
