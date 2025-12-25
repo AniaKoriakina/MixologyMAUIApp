@@ -12,6 +12,7 @@
             <converters:BoolToColorConverter x:Key="BoolToColor"
                                              TrueColor="{StaticResource ActiveButton}"
                                              FalseColor="{StaticResource InactiveButton}"/>
+            <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -19,7 +20,7 @@
     <!--TODO: Сделать валидацию полей -->
 
     <rxui:ReactiveContentPage.Content>
-        <Grid Margin="30" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*"
+        <Grid Margin="30" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*"
               VerticalOptions="Center">
             
             <Label Grid.Row="0" Grid.Column="0" Text="Регистрация" 
@@ -124,10 +125,11 @@
                     BackgroundColor="Transparent"
                     VerticalOptions="Center"
                     HorizontalOptions="Fill"
-                    HeightRequest="60"/>
+                    HeightRequest="60"
+                    IsPassword="True"/>
             </Border>
             
-            <Border Grid.Row="4" Grid.Column="0"
+            <Border Grid.Row="5" Grid.Column="0"
                     StrokeShape="RoundRectangle 15"
                     BackgroundColor="{StaticResource CardColor}"
                     StrokeThickness="0"
@@ -157,7 +159,7 @@
                     HorizontalOptions="FillAndExpand"/>
             </Border>
             
-            <Grid Grid.Row="5" Margin="0,20,0,0" HorizontalOptions="Center">
+            <Grid Grid.Row="6" Margin="0,20,0,0" HorizontalOptions="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -173,10 +175,10 @@
                 <Button Grid.Column="1"
                         Text="Войти"
                         Command="{Binding NavigateToLoginCommand}"
-                        FontFamily="OpenSansSemiBold"
+                        FontFamily="OpenSansSemibold"
                         FontSize="14"
                         BackgroundColor="Transparent"
-                        TextColor="{StaticResource ActiveButton}"
+                        TextColor="{StaticResource PrimaryTextColor}"
                         Padding="0"
                         Margin="5,0,0,0"
                         HorizontalOptions="Start"
